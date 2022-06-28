@@ -1,0 +1,22 @@
+{
+  "name": "distributedapp",
+  "version": "1.0.0",
+  "description": "Aplicação distribuida para rastreio de encomendas",
+  "main": "index.ts",
+  "scripts": {
+    "test": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glasser95/DistributedApp.git"
+  },
+  "author": "Glasser Fernando Paulo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glasser95/DistributedApp/issues"
+  },
+  "homepage": "https://github.com/glasser95/DistributedApp#readme",
+  "dependencies": {
+    "@types/express": "^4.17.13"
+  }
+}
