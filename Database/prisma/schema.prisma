@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin{
+  cpf Int @id @unique
+  user String @db.VarChar(16) @default(uuid())
+  nome String @db.VarChar(24)
+  password String @db.VarChar(16)
+  terminal Terminal[]
+}
+
+model Terminal{
+  id_terminal Int @id @default(autoincrement()) @unique
+  user String @db.VarChar(16)
+  descricao String @db.VarChar(255)
+  endereco String @db.VarChar(120)
+  adm Admin @relation(fields:[admin], references: [cpf]) 
+  admin Int @unique
+  password String @db.VarChar(16)
+  status Status[]
+}
+
+model Cliente{  
+  cnpj Int @db.Integer @id @unique
+  nome String @db.VarChar(60)
+  telefone Int @db.Integer
+  encomenda Encomenda[]
+}
+
+model Encomenda{
+  id_encomenda Int @default(autoincrement()) @id
+  descricao String @db.VarChar(255)
+  endereco String  @db.VarChar(120)
+  clienteID Cliente @relation(fields: [id_cliente], references:[cnpj])
+  id_cliente Int
+  data_emissao DateTime @default(now())
+  status Status[]
+  entregue Boolean @default(false)
+}
+
+model Status{ 
+  idterminal Terminal @relation(fields: [terminal], references: [id_terminal])
+  terminal Int
+  idencomenda Encomenda @relation(fields: [encomenda], references: [id_encomenda])
+  encomenda Int
+  data DateTime @default(now())@unique
+  descricao String @db.VarChar(32)
+}
