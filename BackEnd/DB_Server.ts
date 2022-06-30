@@ -7,6 +7,7 @@ import {UpdateClient, UpdateEncomenda, UpdateTerminal, UpdateStatusEncomenda} fr
 
 const DBserver = express();
 
+DBserver.use(express.json());
 
 //creates routes
 DBserver.post('/cadastrar-encomenda', TerminalAthorization, CreateEncomenda);
@@ -14,13 +15,13 @@ DBserver.post('/cadastrar-cliente', AdmAuthorization, CreateCliente);
 DBserver.post('/cadastrar-terminal',AdmAuthorization, CreateTerminal);
 
 //reads routes
-DBserver.get('/all-encomendas',AdmAuthorization, ReadManyEncomendas);
-DBserver.get('/encomenda/:id',AdmAndTerminalAuthorization, ReadOneEncomenda);
+DBserver.get('/all-encomendas', AdmAuthorization, ReadManyEncomendas);
+DBserver.get('/encomenda/:id', AdmAndTerminalAuthorization, ReadOneEncomenda);
 DBserver.get('/status-encomenda/:id', ReadOneEncomendaStatus);//public route
-DBserver.get('/all-terminal',AdmAuthorization, ReadManyTerminals);
-DBserver.get('/terminal/:id',AdmAuthorization, ReadOneTerminal);
+DBserver.get('/all-terminal', AdmAuthorization, ReadManyTerminals);
+DBserver.get('/terminal/:id', AdmAuthorization, ReadOneTerminal);
 DBserver.get('/clientes', AdmAuthorization, ReadManyClients);
-DBserver.get('/cliente/:id',AdmAndTerminalAuthorization, ReadOneClients );
+DBserver.get('/cliente/:id', AdmAndTerminalAuthorization, ReadOneClients );
 
 //updates routes
 DBserver.get('/update-client', AdmAuthorization, UpdateClient);
