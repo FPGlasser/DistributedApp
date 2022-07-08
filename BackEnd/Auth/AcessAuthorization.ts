@@ -5,6 +5,7 @@ export async function serverAccessAuthorization(req: Request, res: Response, nex
 }
 
 export async function AdmAuthorization(req: Request, res: Response, next: NextFunction ){
+    console.log("Adm authenticated");
     next();
 }
 
